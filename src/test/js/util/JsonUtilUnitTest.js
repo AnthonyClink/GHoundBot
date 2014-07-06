@@ -7,6 +7,7 @@ describe('JsonUtil', function(){
     var readFileSync, json, fs, jsonUtil, readFileSync, existsSync, parse;
 
     beforeEach(function(){
+
         fs = {};
         json = {};
 
