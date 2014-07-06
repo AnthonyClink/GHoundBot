@@ -1,8 +1,19 @@
-var fs = require('fs');
+function JsonUtil(fs, json){
 
-function readJson(fileName){
-    var content = fs.readFileSync(fileName, 'utf8');
-    return JSON.parse(content);
-};
+    var self = this;
 
-exports.readJson = readJson;
+    self.getJSObjectFromJson = function(jsonData){
+
+        var isAFile = fs.existsSync(jsonData);
+
+        if(isAFile) {
+            return json.parse(fs.readFileSync(jsonData, 'utf8'));
+        }
+
+        return json.parse(jsonData);
+    };
+
+    return self;
+}
+
+module.exports = JsonUtil;

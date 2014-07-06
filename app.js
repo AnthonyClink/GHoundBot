@@ -1,25 +1,26 @@
-var twitch = require('./src/main/js/client/twitch-client.js');
+var GHoundBot = require('./src/main/js/service/ghound-bot.js'),
+    bot = new GHoundBot('src/main/resources/twitch-config.json');
 
-twitch.on('error', function(e){
+bot.on('error', function(e){
     throw e;
 });
 
-twitch.on('registered', function(o){
+bot.on('registered', function(o){
     console.log("Registered to the server: " + JSON.stringify(o));
 });
 
-twitch.on('join', function(channel, nick, message){
+bot.on('join', function(channel, nick, message){
     console.log(nick + " joined " + channel + "(" + JSON.stringify(message) + ")");
-    twitch.say(twitch.getConfiguredChannel(), nick + " joined the channel!");
+    bot.say(bot.getConfiguredChannel(), nick + " joined the channel!");
 });
 
-twitch.on('part', function(channel, nick, reason, message){
+bot.on('part', function(channel, nick, reason, message){
     console.log(nick + " left + " + channel + " becuase " + reason + " msg: (" + message + ")");
 });
 
-twitch.on('message' + twitch.getConfiguredChannel(), function(nick, text, message){
+bot.addListener('message' + bot.getConfiguredChannel(), function(nick, text, message){
     console.log(nick + ": " + text + "(" + JSON.stringify(message) + ")");
-    twitch.say(twitch.getConfiguredChannel(), nick + " you said " + text);
+    bot.say(bot.getConfiguredChannel(), 'Hey ' + nick + ' you said: ' + text);
 });
 
-twitch.connect();
+bot.start();

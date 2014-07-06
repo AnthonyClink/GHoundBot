@@ -1,21 +1,49 @@
-/**
- * Created by AnthonyJCLink on 7/5/14.
- */
-var irc = require('irc');
 
-twitchConfig = {
-    nick : 'GHoundBot',
-    userName : 'GHoundBot',
-    channels : ['#gh0sthound'],
-    port : '6667',
-    server : 'irc.twitch.tv',
-    password : 'oauth:28e4awlsqupte3rcgodz6572lfenr27',
-    autoConnect : false,
-    debug : true
+function container(_, Irc, jsonUtil, log){
+
+    function TwitchClient(config) {
+        var self = this,
+            twitchConfig = config,
+            ircClient;
+
+        if ('string' === typeof config) {
+            twitchConfig = jsonUtil.getJSObjectFromJson(config);
+        }
+
+        self.getConfiguredChannel = function () {
+            return twitchConfig.channels[0];
+        };
+
+        self.getIrcClient = function() {
+            if(undefined === ircClient) {
+                ircClient = new Irc.Client(twitchConfig.server, twitchConfig.nick, twitchConfig);
+            }
+            return ircClient;
+        };
+
+        self.connect = function(){
+            self.getIrcClient().connect();
+        };
+
+        self.on = function(event, callback){
+            self.getIrcClient().on(event, callback);
+        };
+
+        self.addListener = function(event, callback){
+            self.getIrcClient().addListener(event, callback);
+        };
+
+        self.say = function(destination, text, event){
+            self.getIrcClient().say(destination, text);
+            log(event);
+        };
+    }
+
+    return TwitchClient;
+
+}
+
+module.exports = container;
+module.exports.TwitchClient = function(_, Irc, JsonUtil, clientConfigPath){
+    return new container(_, Irc, JsonUtil)(clientConfigPath);
 };
-
-
-var client = new irc.Client(twitchConfig.server, twitchConfig.nick, twitchConfig);
-client.getConfiguredChannel = function(){ return twitchConfig.channels[0] };
-
-module.exports = client;
