@@ -1,5 +1,5 @@
 
-function container(_, Irc, jsonUtil, log){
+function Container(_, Irc, jsonUtil, log){
 
     function TwitchClient(config) {
         var self = this,
@@ -33,9 +33,8 @@ function container(_, Irc, jsonUtil, log){
             self.getIrcClient().addListener(event, callback);
         };
 
-        self.say = function(destination, text, event){
+        self.say = function(destination, text){
             self.getIrcClient().say(destination, text);
-            log(event);
         };
     }
 
@@ -43,7 +42,7 @@ function container(_, Irc, jsonUtil, log){
 
 }
 
-module.exports = container;
+module.exports = Container;
 module.exports.TwitchClient = function(_, Irc, JsonUtil, clientConfigPath){
-    return new container(_, Irc, JsonUtil)(clientConfigPath);
+    return new Container(_, Irc, JsonUtil)(clientConfigPath);
 };

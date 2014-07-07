@@ -1,0 +1,10 @@
+{
+    "nick" : "ClinkworksTest",
+    "userName" : "ClinkworksTest",
+    "channels" : ["#magesource"],
+    "port" : "6667",
+    "server" : "irc.twitch.tv",
+    "password" : "oauth:rj9j19nyuwrprqd493bohn65mhi2uai",
+    "autoConnect" : false,
+    "debug" : true
+}

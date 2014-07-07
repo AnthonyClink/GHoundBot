@@ -1,5 +1,5 @@
 var GHoundBot = require('./src/main/js/service/ghound-bot.js'),
-    bot = new GHoundBot('src/main/resources/twitch-config.json');
+    bot = new GHoundBot('src/main/resources/twitch-config-clinkworks-test.json');
 
 bot.on('error', function(e){
     throw e;
@@ -24,3 +24,4 @@ bot.addListener('message' + bot.getConfiguredChannel(), function(nick, text, mes
 });
 
 bot.start();
+
