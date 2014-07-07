@@ -1,5 +1,5 @@
 var GHoundBot = require('./src/main/js/service/ghound-bot.js'),
-    bot = new GHoundBot('src/main/resources/twitch-config-clinkworks-test.json'),
+    bot = new GHoundBot('src/main/resources/twitch-config-clinkworks-test.json', 'src/main/resources/twitch-oauth-config.json'),
     MongoDBService = require('./src/main/js/service/twitch-db-service.js'),
     db = new MongoDBService();
 

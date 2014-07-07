@@ -2,5 +2,5 @@
     "client_id" : "ay1q41lo1sbjunp4gua72xloiybl7lp",
     "client_secret" : "j81sxl724uk4r7h2v40yf7qyr8w0fro",
     "grant_type" : "authorization_code",
-    "redirect_uri" : "http://clinkworks.asuscomm.com:8081/"
+    "redirect_uri" : "http://clinkworks.asuscomm.com:8081/twitch_oauth"
 }

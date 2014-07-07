@@ -12,10 +12,14 @@ var fs = require('fs'),
 
 
 
-function GHosthoundBot(config){
+function GHosthoundBot(chatConfig, oauthConfig){
+
+    var chatConfigObject = jsonUtil.getJSObjectFromJson(chatConfig);
+    var oauthConfigObject = jsonUtil.getJSObjectFromJson(oauthConfig);
+
     var self = this,
-        twitchClient = new TwitchClient(config),
-        twitchOauthService = new TwitchOauthService(http, express, needle, console.log);
+        twitchClient = new TwitchClient(chatConfigObject),
+        twitchOauthService = new TwitchOauthService(oauthConfigObject, http, express, needle, console.log);
 
     self.start = function(){
         twitchOauthService.start();
