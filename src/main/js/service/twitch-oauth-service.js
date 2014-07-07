@@ -1,16 +1,22 @@
-function TwitchOauthService(http, log) {
+
+
+function TwitchOauthService(http, express, needle, log) {
 
     var self = this;
 
-    self.server = http.createServer(function (request, response) {
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.end("Thank you!\n");
-    });
+    var service = express();
+    service.get('/twitch_oauth', handleOauthToken);
+    self.server = http.createServer(service);
 
     self.start = function(){
         self.server.listen(8081);
         log("Twitch OAuth Service started");
     };
+
+    function handleOauthToken(request, response) {
+        log('Token: ' + JSON.stringify(request.query));
+        response.send('hello world');
+    }
 
 }
 

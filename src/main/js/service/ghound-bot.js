@@ -1,7 +1,9 @@
 var fs = require('fs'),
     Irc = require('irc'),
     _ = require('lodash'),
+    needle = require('needle'),
     http = require('http'),
+    express = require('express'),
     json = JSON,
     jsonUtil = require('../util/json-util.js')(fs, json),
     log = console.log,
@@ -13,11 +15,11 @@ var fs = require('fs'),
 function GHosthoundBot(config){
     var self = this,
         twitchClient = new TwitchClient(config),
-        twitchOauthService = new TwitchOauthService(http, console.log);
+        twitchOauthService = new TwitchOauthService(http, express, needle, console.log);
 
     self.start = function(){
         twitchOauthService.start();
-        twitchClient.connect();
+        //twitchClient.connect();
     };
 
     self.on = function(event, cb){
